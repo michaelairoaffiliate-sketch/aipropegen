@@ -9,7 +9,10 @@ let proposalBuilder = {
     company: '',
     email: '',
     phone: '',
-    project: ''
+    project: '',
+    scope: '',
+    goal: '',
+    items: []
 };
 
 /* ---------------- icons ---------------- */
