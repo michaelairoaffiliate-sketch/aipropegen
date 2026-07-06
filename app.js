@@ -415,29 +415,29 @@ function renderProposalBuilder(){
     <h2>Client Information</h2>
 
     <div class="field">
-        <label>Client Name</label>
-        <input class="input">
-    </div>
+    <label>Client Name</label>
+    <input class="input" id="clientName" placeholder="John Smith">
+</div>
 
-    <div class="field">
-        <label>Company</label>
-        <input class="input">
-    </div>
+<div class="field">
+    <label>Company</label>
+    <input class="input" id="companyName" placeholder="ABC Holdings">
+</div>
 
-    <div class="field">
-        <label>Email</label>
-        <input class="input">
-    </div>
+<div class="field">
+    <label>Email</label>
+    <input class="input" id="clientEmail" placeholder="john@company.com">
+</div>
 
-    <div class="field">
-        <label>Phone</label>
-        <input class="input">
-    </div>
+<div class="field">
+    <label>Phone</label>
+    <input class="input" id="clientPhone" placeholder="+27 82 123 4567">
+</div>
 
-    <div class="field">
-        <label>Project Name</label>
-        <input class="input">
-    </div>
+<div class="field">
+    <label>Project Name</label>
+    <input class="input" id="projectName" placeholder="Website Redesign">
+</div>
 
     <div style="display:flex;justify-content:flex-end;margin-top:24px;">
         <button class="btn btn-primary">
