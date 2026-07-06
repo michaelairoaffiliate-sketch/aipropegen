@@ -447,9 +447,9 @@ function renderProposalBuilder(){
 </div>
 
     <div style="display:flex;justify-content:flex-end;margin-top:24px;">
-        <button class="btn btn-primary">
-            Next →
-        </button>
+        <button class="btn btn-primary" onclick="nextBuilderStep()">
+    Next →
+</button>
     </div>
 
 </div>
@@ -457,7 +457,26 @@ function renderProposalBuilder(){
     `;
 
 }
+function nextBuilderStep() {
 
+    proposalBuilder.clientName =
+        document.getElementById('clientName').value;
+
+    proposalBuilder.company =
+        document.getElementById('companyName').value;
+
+    proposalBuilder.email =
+        document.getElementById('clientEmail').value;
+
+    proposalBuilder.phone =
+        document.getElementById('clientPhone').value;
+
+    proposalBuilder.project =
+        document.getElementById('projectName').value;
+
+    alert("Step 1 Complete!");
+
+}
 function proposalStatusBadge(p){
   if(p.approvalStatus === 'pending') return `<span class="badge badge-pending_approval">pending approval</span>`;
   return `<span class="badge badge-${p.status}">${p.status.replace('_',' ')}</span>`;
