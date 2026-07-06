@@ -475,7 +475,7 @@ function nextBuilderStep(){
     proposalBuilder.project =
         document.getElementById('projectName').value;
 
-    alert("Step 1 Complete!");
+    renderProjectStep();
 
 }
 
