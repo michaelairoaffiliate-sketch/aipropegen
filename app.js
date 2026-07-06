@@ -309,9 +309,31 @@ function saveNewLead(){
 function renderProposals(){
   app.innerHTML = `
     <div class="page-head">
-      <div><h1>Proposals</h1></div>
-      <button class="btn btn-primary" onclick="openCreateProposalModal()">${I.plus} Create Proposal</button>
-    </div>
+
+  <div>
+
+    <span class="page-badge">📄 Proposal Workspace</span>
+
+    <h1>Your Proposals</h1>
+
+    <p class="page-subtitle">
+      Create, send and manage every proposal from one place.
+    </p>
+
+  </div>
+
+  <div class="page-actions">
+
+    <button class="btn btn-primary"
+      onclick="openCreateProposalModal()">
+
+      ${I.plus} New Proposal
+
+    </button>
+
+  </div>
+
+</div>
     <div class="card">
       <table>
         <thead><tr><th>Title</th><th>Lead</th><th>Status</th><th>Amount</th><th>Views</th><th>Valid Until</th><th></th></tr></thead>
