@@ -412,9 +412,40 @@ function renderProposalBuilder(){
 
         <div class="card">
 
-            <h2>Step 1 of 4</h2>
+    <h2>Client Information</h2>
 
-            <p>
+    <div class="field">
+        <label>Client Name</label>
+        <input class="input">
+    </div>
+
+    <div class="field">
+        <label>Company</label>
+        <input class="input">
+    </div>
+
+    <div class="field">
+        <label>Email</label>
+        <input class="input">
+    </div>
+
+    <div class="field">
+        <label>Phone</label>
+        <input class="input">
+    </div>
+
+    <div class="field">
+        <label>Project Name</label>
+        <input class="input">
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;margin-top:24px;">
+        <button class="btn btn-primary">
+            Next →
+        </button>
+    </div>
+
+</div>
                 ✨ Proposal Builder
 
 ──────────────────────────
