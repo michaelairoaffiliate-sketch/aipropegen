@@ -389,6 +389,39 @@ function renderProposals(){
     </div>
   `;
 }
+function renderProposalBuilder(){
+
+    app.innerHTML = `
+        <div class="page-head">
+
+            <div>
+
+                <span class="page-badge">
+                    ✨ Proposal Builder
+                </span>
+
+                <h1>Create Proposal</h1>
+
+                <p class="page-subtitle">
+                    Build a professional proposal in a few simple steps.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h2>Step 1 of 4</h2>
+
+            <p>
+                Builder coming next...
+            </p>
+
+        </div>
+    `;
+
+}
 function proposalStatusBadge(p){
   if(p.approvalStatus === 'pending') return `<span class="badge badge-pending_approval">pending approval</span>`;
   return `<span class="badge badge-${p.status}">${p.status.replace('_',' ')}</span>`;
