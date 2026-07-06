@@ -325,8 +325,7 @@ function renderProposals(){
 
   <div class="page-actions">
 
-    <button class="btn btn-primary"
-      onclick="openCreateProposalModal()">
+    <button class="btn btn-primary" onclick="location.hash='#/proposal-builder'">
 
       ${I.plus} New Proposal
 
