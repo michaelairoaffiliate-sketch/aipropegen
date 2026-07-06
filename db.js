@@ -1,12 +1,12 @@
 /* ===========================================================
-   PropelAI — shared data layer
+   ProposalPilotAI — shared data layer
    Everything here is a stand-in for a real backend. It persists
    to localStorage so the demo feels alive across the dashboard
    and the public proposal page. See README.md for what a real
    backend would replace each piece with.
 =========================================================== */
 
-const DB_KEY = 'propelai_db_v1';
+const DB_KEY = 'ProposalPilotAI_db_v1';
 
 function uid(prefix){ return prefix + '_' + Math.random().toString(36).slice(2,9); }
 

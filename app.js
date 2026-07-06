@@ -1,5 +1,5 @@
 /* ===========================================================
-   PropelAI — dashboard app (vanilla JS, hash router)
+   ProposalPilot AI — dashboard app (vanilla JS, hash router)
 =========================================================== */
 
 let DB = loadDB();
@@ -102,9 +102,24 @@ function renderDashboard(){
 
   app.innerHTML = `
     <div class="page-head">
-      <div><h1>Dashboard</h1></div>
-      <button class="btn btn-ghost btn-sm" onclick="doResetDemo()">Reset demo data</button>
-    </div>
+  <div>
+    <span class="page-badge">🚀 ProposalPilot AI</span>
+    <h1>Welcome back, Pilot 👋</h1>
+    <p class="page-subtitle">
+      Here's what's happening with your proposals and sales pipeline today.
+    </p>
+  </div>
+
+  <div class="page-actions">
+    <button class="btn btn-primary" onclick="location.hash='#/proposals'">
+      + New Proposal
+    </button>
+
+    <button class="btn btn-ghost btn-sm" onclick="doResetDemo()">
+      Reset Demo
+    </button>
+  </div>
+</div>
 
     <div class="stat-grid">
       ${statCard('New Leads', newLeadsCount, I.leads, '+100%')}
@@ -167,10 +182,21 @@ function renderDashboard(){
 function statCard(label, value, icon, delta){
   return `
     <div class="stat-card">
-      <div class="head">${label}<span class="icon">${icon}</span></div>
-      <div class="value">${value}</div>
-      <div class="delta"><strong>${delta}</strong> from last month</div>
-    </div>`;
+
+      <div class="stat-top">
+        <div class="stat-label">${label}</div>
+        <div class="stat-icon">${icon}</div>
+      </div>
+
+      <div class="stat-value">${value}</div>
+
+      <div class="stat-footer">
+        <span class="trend-up">▲ ${delta}</span>
+        <span class="trend-text">vs last month</span>
+      </div>
+
+    </div>
+  `;
 }
 
 function daysUntil(ts){

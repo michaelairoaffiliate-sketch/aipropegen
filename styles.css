@@ -1,5 +1,5 @@
 /* ===========================================================
-   PropelAI — shared design tokens & base styles
+   ProposalPilot AI — shared design tokens & base styles
    Palette grounded in the product screenshots: near-black navy
    background, indigo accent (#6366f1, the exact hex shown in
    the Branding settings screen), mono for data/labels.
@@ -345,4 +345,165 @@ tbody tr:hover{background:var(--surface-hover);}
   .sidebar{transform:translateX(-100%);transition:transform .2s ease;}
   .sidebar.open{transform:translateX(0);}
   .main{margin-left:0;padding:24px;}
+}
+.page-badge{
+    display:inline-block;
+    padding:6px 14px;
+    border-radius:999px;
+    background:#1E3A8A;
+    color:#fff;
+    font-size:12px;
+    font-weight:600;
+    margin-bottom:14px;
+}
+
+.page-subtitle{
+    margin-top:10px;
+    color:#94A3B8;
+    font-size:15px;
+}
+
+.page-actions{
+    display:flex;
+    gap:12px;
+    align-items:center;
+}
+
+.btn-primary{
+    background:#2563EB;
+    color:white;
+    border:none;
+    padding:12px 22px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.25s;
+}
+
+.btn-primary:hover{
+    transform:translateY(-2px);
+}
+/* ---------- Premium Dashboard Cards ---------- */
+
+.stat-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.stat-label{
+    color:#94A3B8;
+    font-size:14px;
+    font-weight:500;
+}
+
+.stat-icon{
+    width:48px;
+    height:48px;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#4F46E5,#7C3AED);
+    color:white;
+}
+
+.stat-value{
+    font-size:44px;
+    font-weight:700;
+    margin-bottom:18px;
+}
+
+.stat-footer{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.trend-up{
+    color:#22C55E;
+    font-weight:700;
+}
+
+.trend-text{
+    color:#94A3B8;
+}
+/* ---------- Sidebar Upgrade ---------- */
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:32px;
+}
+
+.brand-text h2{
+    font-size:18px;
+    margin:0;
+}
+
+.brand-text span{
+    color:#94A3B8;
+    font-size:12px;
+}
+
+.sidebar-footer{
+    margin-top:auto;
+    padding-top:30px;
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+.workspace-title{
+    color:#94A3B8;
+    font-size:12px;
+    margin-bottom:6px;
+}
+
+.workspace-name{
+    font-weight:600;
+    margin-bottom:4px;
+}
+
+.workspace-plan{
+    color:#22C55E;
+    font-size:13px;
+    margin-bottom:22px;
+}
+
+.storage-head{
+    display:flex;
+    justify-content:space-between;
+    font-size:13px;
+    margin-bottom:8px;
+}
+
+.storage-bar{
+    height:8px;
+    border-radius:20px;
+    overflow:hidden;
+    background:#1F2937;
+    margin-bottom:20px;
+}
+
+.storage-fill{
+    width:78%;
+    height:100%;
+    background:linear-gradient(90deg,#6D5EF8,#8B5CF6);
+}
+
+.upgrade-btn{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:12px;
+    background:#6D5EF8;
+    color:#fff;
+    font-weight:600;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.upgrade-btn:hover{
+    transform:translateY(-2px);
 }
