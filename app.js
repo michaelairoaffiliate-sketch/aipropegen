@@ -4,6 +4,13 @@
 
 let DB = loadDB();
 const app = document.getElementById('app');
+let proposalBuilder = {
+    clientName: '',
+    company: '',
+    email: '',
+    phone: '',
+    project: ''
+};
 
 /* ---------------- icons ---------------- */
 const I = {
