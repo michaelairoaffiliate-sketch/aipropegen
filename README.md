@@ -1,4 +1,4 @@
-# PropelAI
+# ProposalPilotAI
 
 A proposal generator & lead-tracking dashboard, recreated from your screenshots, with the 10 competitive features wired in end-to-end as a working prototype.
 
