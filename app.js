@@ -457,26 +457,6 @@ function renderProposalBuilder(){
     `;
 
 }
-function nextBuilderStep() {
-
-    proposalBuilder.clientName =
-        document.getElementById('clientName').value;
-
-    proposalBuilder.company =
-        document.getElementById('companyName').value;
-
-    proposalBuilder.email =
-        document.getElementById('clientEmail').value;
-
-    proposalBuilder.phone =
-        document.getElementById('clientPhone').value;
-
-    proposalBuilder.project =
-        document.getElementById('projectName').value;
-
-    alert("Step 1 Complete!");
-
-}
 
 function nextBuilderStep(){
 
