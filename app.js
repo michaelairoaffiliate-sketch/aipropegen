@@ -446,41 +446,11 @@ function renderProposalBuilder(){
     </div>
 
 </div>
-                ✨ Proposal Builder
 
-──────────────────────────
-
-● Client
-○ Project
-○ Pricing
-○ Review
-
-──────────────────────────
-
-Client Information
-
-Client Name
-[________________]
-
-Company
-[________________]
-
-Email
-[________________]
-
-Phone
-[________________]
-
-Project Name
-[________________]
-
-                Next →
-            </p>
-
-        </div>
     `;
 
 }
+
 function proposalStatusBadge(p){
   if(p.approvalStatus === 'pending') return `<span class="badge badge-pending_approval">pending approval</span>`;
   return `<span class="badge badge-${p.status}">${p.status.replace('_',' ')}</span>`;
