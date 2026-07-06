@@ -1,5 +1,5 @@
 /* ===========================================================
-   PropelAI — public proposal viewer (no login required)
+   ProposalPilot AI — public proposal viewer (no login required)
    Opened via proposal.html?id=<proposalId>
 =========================================================== */
 
