@@ -1,5 +1,5 @@
 /* ===========================================================
-   PropelAI — dashboard app (vanilla JS, hash router)
+   ProposalPilot AI — dashboard app (vanilla JS, hash router)
 =========================================================== */
 
 let DB = loadDB();
