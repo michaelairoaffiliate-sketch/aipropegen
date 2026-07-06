@@ -532,9 +532,9 @@ function renderProjectStep(){
                     ← Back
                 </button>
 
-                <button class="btn btn-primary">
-                    Next →
-                </button>
+                <button class="btn btn-primary" onclick="nextProjectStep()">
+    Next →
+</button>
 
             </div>
 
