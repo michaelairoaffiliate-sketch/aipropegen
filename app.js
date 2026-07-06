@@ -546,6 +546,17 @@ function renderProjectStep(){
 
 }
 
+function nextProjectStep(){
+
+    proposalBuilder.scope =
+        document.getElementById('projectScope').value;
+
+    proposalBuilder.goal =
+        document.getElementById('projectGoal').value;
+
+    renderPricingStep();
+
+}
 function proposalStatusBadge(p){
   if(p.approvalStatus === 'pending') return `<span class="badge badge-pending_approval">pending approval</span>`;
   return `<span class="badge badge-${p.status}">${p.status.replace('_',' ')}</span>`;
