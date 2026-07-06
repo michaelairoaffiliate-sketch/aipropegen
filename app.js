@@ -309,9 +309,66 @@ function saveNewLead(){
 function renderProposals(){
   app.innerHTML = `
     <div class="page-head">
-      <div><h1>Proposals</h1></div>
-      <button class="btn btn-primary" onclick="openCreateProposalModal()">${I.plus} Create Proposal</button>
-    </div>
+
+  <div>
+
+    <span class="page-badge">📄 Proposal Workspace</span>
+
+    <h1>Your Proposals</h1>
+
+    <p class="page-subtitle">
+      Create, send and manage every proposal from one place.
+    </p>
+
+  </div>
+
+  <div class="page-actions">
+
+    <button class="btn btn-primary"
+      onclick="openCreateProposalModal()">
+
+      ${I.plus} New Proposal
+
+    </button>
+
+  </div>
+
+</div>
+<div class="stat-grid">
+
+  ${statCard(
+      'Drafts',
+      DB.proposals.filter(p=>p.status==='draft').length,
+      I.proposals,
+      'Ready'
+  )}
+
+  ${statCard(
+      'Sent',
+      DB.proposals.filter(p=>p.status==='sent').length,
+      I.eye,
+      'Active'
+  )}
+
+  ${statCard(
+      'Accepted',
+      DB.proposals.filter(p=>p.status==='accepted').length,
+      I.check,
+      'Won'
+  )}
+
+  ${statCard(
+      'Revenue',
+      fmtMoney(
+        DB.proposals
+          .filter(p=>p.status==='accepted')
+          .reduce((t,p)=>t+p.amount,0)
+      ),
+      I.analytics,
+      'Closed'
+  )}
+
+</div>
     <div class="card">
       <table>
         <thead><tr><th>Title</th><th>Lead</th><th>Status</th><th>Amount</th><th>Views</th><th>Valid Until</th><th></th></tr></thead>
