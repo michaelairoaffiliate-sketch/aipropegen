@@ -346,3 +346,40 @@ tbody tr:hover{background:var(--surface-hover);}
   .sidebar.open{transform:translateX(0);}
   .main{margin-left:0;padding:24px;}
 }
+.page-badge{
+    display:inline-block;
+    padding:6px 14px;
+    border-radius:999px;
+    background:#1E3A8A;
+    color:#fff;
+    font-size:12px;
+    font-weight:600;
+    margin-bottom:14px;
+}
+
+.page-subtitle{
+    margin-top:10px;
+    color:#94A3B8;
+    font-size:15px;
+}
+
+.page-actions{
+    display:flex;
+    gap:12px;
+    align-items:center;
+}
+
+.btn-primary{
+    background:#2563EB;
+    color:white;
+    border:none;
+    padding:12px 22px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.25s;
+}
+
+.btn-primary:hover{
+    transform:translateY(-2px);
+}
