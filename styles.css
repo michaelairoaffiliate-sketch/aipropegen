@@ -383,3 +383,49 @@ tbody tr:hover{background:var(--surface-hover);}
 .btn-primary:hover{
     transform:translateY(-2px);
 }
+/* ---------- Premium Dashboard Cards ---------- */
+
+.stat-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.stat-label{
+    color:#94A3B8;
+    font-size:14px;
+    font-weight:500;
+}
+
+.stat-icon{
+    width:48px;
+    height:48px;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#4F46E5,#7C3AED);
+    color:white;
+}
+
+.stat-value{
+    font-size:44px;
+    font-weight:700;
+    margin-bottom:18px;
+}
+
+.stat-footer{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.trend-up{
+    color:#22C55E;
+    font-weight:700;
+}
+
+.trend-text{
+    color:#94A3B8;
+}
