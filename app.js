@@ -4,6 +4,13 @@
 
 let DB = loadDB();
 const app = document.getElementById('app');
+let proposalBuilder = {
+    clientName: '',
+    company: '',
+    email: '',
+    phone: '',
+    project: ''
+};
 
 /* ---------------- icons ---------------- */
 const I = {
@@ -412,16 +419,66 @@ function renderProposalBuilder(){
 
         <div class="card">
 
-            <h2>Step 1 of 4</h2>
+    <h2>Client Information</h2>
 
-            <p>
-                Builder coming next...
-            </p>
+    <div class="field">
+    <label>Client Name</label>
+    <input class="input" id="clientName" placeholder="John Smith">
+</div>
 
-        </div>
+<div class="field">
+    <label>Company</label>
+    <input class="input" id="companyName" placeholder="ABC Holdings">
+</div>
+
+<div class="field">
+    <label>Email</label>
+    <input class="input" id="clientEmail" placeholder="john@company.com">
+</div>
+
+<div class="field">
+    <label>Phone</label>
+    <input class="input" id="clientPhone" placeholder="+27 82 123 4567">
+</div>
+
+<div class="field">
+    <label>Project Name</label>
+    <input class="input" id="projectName" placeholder="Website Redesign">
+</div>
+
+    <div style="display:flex;justify-content:flex-end;margin-top:24px;">
+        <button class="btn btn-primary" onclick="nextBuilderStep()">
+    Next →
+</button>
+    </div>
+
+</div>
+
     `;
 
 }
+
+function nextBuilderStep(){
+
+    proposalBuilder.clientName =
+        document.getElementById('clientName').value;
+
+    proposalBuilder.company =
+        document.getElementById('companyName').value;
+
+    proposalBuilder.email =
+        document.getElementById('clientEmail').value;
+
+    proposalBuilder.phone =
+        document.getElementById('clientPhone').value;
+
+    proposalBuilder.project =
+        document.getElementById('projectName').value;
+
+    alert("Step 1 Complete!");
+
+}
+
 function proposalStatusBadge(p){
   if(p.approvalStatus === 'pending') return `<span class="badge badge-pending_approval">pending approval</span>`;
   return `<span class="badge badge-${p.status}">${p.status.replace('_',' ')}</span>`;
