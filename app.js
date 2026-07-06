@@ -182,10 +182,21 @@ function renderDashboard(){
 function statCard(label, value, icon, delta){
   return `
     <div class="stat-card">
-      <div class="head">${label}<span class="icon">${icon}</span></div>
-      <div class="value">${value}</div>
-      <div class="delta"><strong>${delta}</strong> from last month</div>
-    </div>`;
+
+      <div class="stat-top">
+        <div class="stat-label">${label}</div>
+        <div class="stat-icon">${icon}</div>
+      </div>
+
+      <div class="stat-value">${value}</div>
+
+      <div class="stat-footer">
+        <span class="trend-up">▲ ${delta}</span>
+        <span class="trend-text">vs last month</span>
+      </div>
+
+    </div>
+  `;
 }
 
 function daysUntil(ts){
