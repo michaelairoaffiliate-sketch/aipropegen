@@ -69,14 +69,15 @@ function router(){
   const [page, id] = hash.split('/');
   renderNav(page);
   const routes = {
-    dashboard: renderDashboard,
-    leads: renderLeads,
-    proposals: () => id ? renderProposalDetail(id) : renderProposals(),
-    templates: renderTemplates,
-    'email-templates': renderEmailTemplates,
-    analytics: renderAnalytics,
-    settings: renderSettings,
-  };
+  dashboard: renderDashboard,
+  leads: renderLeads,
+  proposals: () => id ? renderProposalDetail(id) : renderProposals(),
+  'proposal-builder': renderProposalBuilder,
+  templates: renderTemplates,
+  'email-templates': renderEmailTemplates,
+  analytics: renderAnalytics,
+  settings: renderSettings,
+};
   (routes[page] || renderDashboard)();
   window.scrollTo(0,0);
 }
