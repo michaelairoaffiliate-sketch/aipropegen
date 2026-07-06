@@ -104,7 +104,7 @@ function renderDashboard(){
     <div class="page-head">
   <div>
     <span class="page-badge">🚀 ProposalPilot AI</span>
-    <h1>Welcome back, Michael 👋</h1>
+    <h1>Welcome back, Pilot 👋</h1>
     <p class="page-subtitle">
       Here's what's happening with your proposals and sales pipeline today.
     </p>
