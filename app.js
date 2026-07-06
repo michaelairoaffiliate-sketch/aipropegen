@@ -479,6 +479,70 @@ function nextBuilderStep(){
 
 }
 
+function renderProjectStep(){
+
+    app.innerHTML = `
+        <div class="page-head">
+
+            <div>
+
+                <span class="page-badge">
+                    ✨ Proposal Builder
+                </span>
+
+                <h1>Project Details</h1>
+
+                <p class="page-subtitle">
+                    Tell ProposalPilot AI about your client's project.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h2>Project Scope</h2>
+
+            <div class="field">
+                <label>Describe the project</label>
+
+                <textarea
+                    id="projectScope"
+                    class="input"
+                    rows="6"
+                    placeholder="Describe the work you will do..."></textarea>
+
+            </div>
+
+            <div class="field">
+
+                <label>Main Goal</label>
+
+                <input
+                    id="projectGoal"
+                    class="input"
+                    placeholder="Generate more leads">
+
+            </div>
+
+            <div style="display:flex;justify-content:space-between;margin-top:30px;">
+
+                <button class="btn btn-ghost" onclick="renderProposalBuilder()">
+                    ← Back
+                </button>
+
+                <button class="btn btn-primary">
+                    Next →
+                </button>
+
+            </div>
+
+        </div>
+    `;
+
+}
+
 function proposalStatusBadge(p){
   if(p.approvalStatus === 'pending') return `<span class="badge badge-pending_approval">pending approval</span>`;
   return `<span class="badge badge-${p.status}">${p.status.replace('_',' ')}</span>`;
