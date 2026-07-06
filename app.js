@@ -69,14 +69,15 @@ function router(){
   const [page, id] = hash.split('/');
   renderNav(page);
   const routes = {
-    dashboard: renderDashboard,
-    leads: renderLeads,
-    proposals: () => id ? renderProposalDetail(id) : renderProposals(),
-    templates: renderTemplates,
-    'email-templates': renderEmailTemplates,
-    analytics: renderAnalytics,
-    settings: renderSettings,
-  };
+  dashboard: renderDashboard,
+  leads: renderLeads,
+  proposals: () => id ? renderProposalDetail(id) : renderProposals(),
+  'proposal-builder': renderProposalBuilder,
+  templates: renderTemplates,
+  'email-templates': renderEmailTemplates,
+  analytics: renderAnalytics,
+  settings: renderSettings,
+};
   (routes[page] || renderDashboard)();
   window.scrollTo(0,0);
 }
@@ -324,8 +325,7 @@ function renderProposals(){
 
   <div class="page-actions">
 
-    <button class="btn btn-primary"
-      onclick="openCreateProposalModal()">
+    <button class="btn btn-primary" onclick="location.hash='#/proposal-builder'">
 
       ${I.plus} New Proposal
 
@@ -388,6 +388,39 @@ function renderProposals(){
       </table>
     </div>
   `;
+}
+function renderProposalBuilder(){
+
+    app.innerHTML = `
+        <div class="page-head">
+
+            <div>
+
+                <span class="page-badge">
+                    ✨ Proposal Builder
+                </span>
+
+                <h1>Create Proposal</h1>
+
+                <p class="page-subtitle">
+                    Build a professional proposal in a few simple steps.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h2>Step 1 of 4</h2>
+
+            <p>
+                Builder coming next...
+            </p>
+
+        </div>
+    `;
+
 }
 function proposalStatusBadge(p){
   if(p.approvalStatus === 'pending') return `<span class="badge badge-pending_approval">pending approval</span>`;
