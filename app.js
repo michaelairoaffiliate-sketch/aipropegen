@@ -557,6 +557,45 @@ function nextProjectStep(){
     renderPricingStep();
 
 }
+
+function addPricingItem(){
+
+    const container =
+        document.getElementById("pricingItems");
+
+    const row =
+        document.createElement("div");
+
+    row.style.marginBottom = "20px";
+
+    row.innerHTML = `
+
+        <input
+            class="input item-name"
+            placeholder="Description">
+
+        <div style="display:flex;gap:10px;margin-top:10px;">
+
+            <input
+                class="input item-qty"
+                type="number"
+                value="1"
+                min="1"
+                style="width:120px;">
+
+            <input
+                class="input item-price"
+                type="number"
+                value="0"
+                style="width:180px;">
+
+        </div>
+
+    `;
+
+    container.appendChild(row);
+
+}
 function proposalStatusBadge(p){
   if(p.approvalStatus === 'pending') return `<span class="badge badge-pending_approval">pending approval</span>`;
   return `<span class="badge badge-${p.status}">${p.status.replace('_',' ')}</span>`;
