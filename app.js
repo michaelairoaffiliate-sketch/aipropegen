@@ -415,7 +415,35 @@ function renderProposalBuilder(){
             <h2>Step 1 of 4</h2>
 
             <p>
-                Builder coming next...
+                ✨ Proposal Builder
+
+──────────────────────────
+
+● Client
+○ Project
+○ Pricing
+○ Review
+
+──────────────────────────
+
+Client Information
+
+Client Name
+[________________]
+
+Company
+[________________]
+
+Email
+[________________]
+
+Phone
+[________________]
+
+Project Name
+[________________]
+
+                Next →
             </p>
 
         </div>
