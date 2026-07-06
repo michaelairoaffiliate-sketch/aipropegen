@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  body{ background: radial-gradient(ellipse 900px 500px at 20% -10%, rgba(99,102,241,0.12), transparent 60%), var(--bg); }
+  .pub-wrap{ max-width:760px; margin:0 auto; padding:56px 24px 100px; }
+  .pub-header{ display:flex; align-items:center; justify-content:space-between; margin-bottom:40px; }
+  .pub-logo{ display:flex; align-items:center; gap:10px; font-family:var(--font-display); font-weight:700; font-size:19px; }
+  .pub-logo img{ height:30px; border-radius:6px; }
+  .pub-badge{ font-family:var(--font-mono); font-size:12px; color:var(--muted); border:1px solid var(--border); padding:6px 12px; border-radius:100px; }
+  .doc-card{ background:var(--surface); border:1px solid var(--border); border-radius:16px; overflow:hidden; }
+  .doc-head{ padding:36px 38px 28px; border-bottom:1px solid var(--border-soft); }
+  .doc-head .kicker{margin-bottom:10px;}
+  .doc-head h1{ font-family:var(--font-display); font-size:30px; font-weight:700; letter-spacing:-0.01em; }
+  .doc-head .meta{ margin-top:14px; display:flex; gap:26px; flex-wrap:wrap; color:var(--muted); font-size:13.5px;}
+  .doc-body{ padding:34px 38px; }
+  .sig-pad{ border:1px dashed var(--border); border-radius:10px; padding:22px; text-align:center; }
+  .sig-preview{ font-family:'Caveat', cursive; font-size:38px; color:var(--text); margin-top:10px; min-height:48px; }
+  .signed-box{ background:var(--good-bg); border:1px solid rgba(52,211,153,0.3); border-radius:10px; padding:18px 20px; display:flex; align-items:center; gap:12px; color:var(--good); font-weight:600;}
+  .stripe-btn{
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    background:#635bff; color:#fff; font-weight:700; padding:14px; border-radius:9px; width:100%;
+  }
+  .stripe-btn:hover{ background:#5851e6; }
+  .checkout-overlay{ position:fixed; inset:0; background:rgba(4,5,9,0.8); display:flex; align-items:center; justify-content:center; z-index:200;}
+  .checkout-card{ background:#fff; color:#0a0c12; width:100%; max-width:400px; border-radius:14px; padding:28px; }
+  .checkout-card input{ width:100%; padding:11px 13px; border:1px solid #d9dbe3; border-radius:8px; margin-top:6px; font-size:14px; }
+  .checkout-card label{ font-size:12.5px; font-weight:600; color:#3c3f4a; }
+  .step-track{ display:flex; align-items:center; gap:8px; margin-bottom:28px; }
+  .step-dot{ width:26px;height:26px;border-radius:50%; display:flex;align-items:center;justify-content:center; font-size:12px; font-weight:700; font-family:var(--font-mono);}
+  .step-line{ flex:1; height:2px; background:var(--border); }
+</style>
+</head>
+<body>
+  <div class="pub-wrap" id="pubRoot"></div>
+
+  <div class="toast-wrap" id="toastWrap"></div>
+
+<script src="db.js"></script>
+<script src="public.js"></script>
+</body>
+</html>
