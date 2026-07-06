@@ -557,6 +557,77 @@ function nextProjectStep(){
     renderPricingStep();
 
 }
+
+function renderPricingStep(){
+
+    app.innerHTML = `
+        <div class="page-head">
+
+            <div>
+
+                <span class="page-badge">
+                    💰 Proposal Builder
+                </span>
+
+                <h1>Pricing</h1>
+
+                <p class="page-subtitle">
+                    Build your pricing for this proposal.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h2>Line Items</h2>
+
+            <div id="pricingItems">
+
+            </div>
+
+            <button
+                class="btn btn-subtle"
+                onclick="addPricingItem()"
+                style="margin-top:20px;">
+
+                + Add Item
+
+            </button>
+
+            <hr style="margin:30px 0;">
+
+            <h2 id="proposalTotal">
+                Total: $0
+            </h2>
+
+            <div style="display:flex;justify-content:space-between;margin-top:30px;">
+
+                <button
+                    class="btn btn-ghost"
+                    onclick="renderProjectStep()">
+
+                    ← Back
+
+                </button>
+
+                <button
+                    class="btn btn-primary">
+
+                    Next →
+
+                </button>
+
+            </div>
+
+        </div>
+    `;
+
+    addPricingItem();
+
+}
+
 function proposalStatusBadge(p){
   if(p.approvalStatus === 'pending') return `<span class="badge badge-pending_approval">pending approval</span>`;
   return `<span class="badge badge-${p.status}">${p.status.replace('_',' ')}</span>`;
