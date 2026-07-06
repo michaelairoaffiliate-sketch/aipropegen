@@ -334,6 +334,41 @@ function renderProposals(){
   </div>
 
 </div>
+<div class="stat-grid">
+
+  ${statCard(
+      'Drafts',
+      DB.proposals.filter(p=>p.status==='draft').length,
+      I.proposals,
+      'Ready'
+  )}
+
+  ${statCard(
+      'Sent',
+      DB.proposals.filter(p=>p.status==='sent').length,
+      I.eye,
+      'Active'
+  )}
+
+  ${statCard(
+      'Accepted',
+      DB.proposals.filter(p=>p.status==='accepted').length,
+      I.check,
+      'Won'
+  )}
+
+  ${statCard(
+      'Revenue',
+      fmtMoney(
+        DB.proposals
+          .filter(p=>p.status==='accepted')
+          .reduce((t,p)=>t+p.amount,0)
+      ),
+      I.analytics,
+      'Closed'
+  )}
+
+</div>
     <div class="card">
       <table>
         <thead><tr><th>Title</th><th>Lead</th><th>Status</th><th>Amount</th><th>Views</th><th>Valid Until</th><th></th></tr></thead>
