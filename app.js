@@ -980,7 +980,102 @@ function renderGeneratedProposal(proposal){
 
 function downloadProposalPDF(){
 
-    alert("PDF Export coming next...");
+    const { jsPDF } = window.jspdf;
+
+    const doc = new jsPDF();
+
+    let y = 20;
+
+    doc.setFont("helvetica","bold");
+    doc.setFontSize(22);
+    doc.text("ProposalPilot AI",20,y);
+
+    y += 10;
+
+    doc.setFontSize(18);
+    doc.text(proposal.project || "Business Proposal",20,y);
+
+    y += 15;
+
+    doc.setFont("helvetica","normal");
+    doc.setFontSize(12);
+
+    doc.text("Client: " + proposal.clientName,20,y);
+    y += 8;
+
+    doc.text("Company: " + proposal.company,20,y);
+    y += 8;
+
+    doc.text("Email: " + proposal.email,20,y);
+    y += 8;
+
+    doc.text("Phone: " + proposal.phone,20,y);
+    y += 15;
+
+    doc.setFont("helvetica","bold");
+    doc.text("Project Details",20,y);
+
+    y += 8;
+
+    doc.setFont("helvetica","normal");
+
+    const scopeLines = doc.splitTextToSize(proposal.scope || "",170);
+
+    doc.text(scopeLines,20,y);
+
+    y += scopeLines.length * 7 + 10;
+
+    doc.setFont("helvetica","bold");
+    doc.text("Pricing",20,y);
+
+    y += 10;
+
+    doc.setFont("helvetica","normal");
+
+    proposal.items.forEach(item=>{
+
+        doc.text(
+            `${item.description} (${item.qty} × $${item.price})`,
+            20,
+            y
+        );
+
+        y += 8;
+
+    });
+
+    y += 5;
+
+    doc.setFont("helvetica","bold");
+
+    doc.text(
+        "Total: $" + proposal.total.toLocaleString(),
+        20,
+        y
+    );
+
+    y += 20;
+
+    doc.setFontSize(10);
+    doc.setFont("helvetica","normal");
+
+    doc.text(
+        "This proposal is valid for 30 days from the date of issue.",
+        20,
+        y
+    );
+
+    y += 15;
+
+    doc.text("Client Signature:",20,y);
+
+    y += 20;
+
+    doc.line(20,y,90,y);
+
+    doc.save(
+        `${proposal.clientName}-Proposal.pdf`
+    );
 
 }
 
