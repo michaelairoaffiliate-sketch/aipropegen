@@ -825,7 +825,9 @@ function generateProposal(){
         "generatedProposals",
         JSON.stringify(proposals)
     );
-
+   
+currentProposal = proposal;
+   
     renderGeneratedProposal(proposal);
 
 }
