@@ -39,6 +39,10 @@ const NAV_ITEMS = [
   { key: 'dashboard', label: 'Dashboard', icon: I.dashboard },
   { key: 'leads', label: 'Leads', icon: I.leads },
   { key: 'proposals', label: 'Proposals', icon: I.proposals },
+
+  // NEW
+  { key: 'proposal-builder', label: 'Proposal Builder', icon: I.sparkle },
+
   { key: 'templates', label: 'Templates', icon: I.templates },
   { key: 'email-templates', label: 'Email Templates', icon: I.email },
   { key: 'analytics', label: 'Analytics', icon: I.analytics },
