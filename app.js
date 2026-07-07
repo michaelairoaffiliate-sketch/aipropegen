@@ -980,6 +980,8 @@ function renderGeneratedProposal(proposal){
 
 function downloadProposalPDF(){
 
+    alert("Download button clicked!");
+
     const { jsPDF } = window.jspdf;
 
     const doc = new jsPDF();
