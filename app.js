@@ -948,23 +948,39 @@ function renderGeneratedProposal(proposal){
 
             <div style="display:flex;gap:15px;margin-top:30px;">
 
-                <button class="btn btn-primary" onclick="window.print()">
+    <button
+        class="btn btn-primary"
+        onclick="downloadProposalPDF()">
 
-                    🖨 Print
+        📄 Download PDF
 
-                </button>
+    </button>
 
-                <button class="btn btn-subtle" onclick="location.hash='#/proposals'">
+    <button
+        class="btn btn-subtle"
+        onclick="window.print()">
 
-                    ← Back to Proposals
+        🖨 Print
 
-                </button>
+    </button>
 
-            </div>
+    <button
+        class="btn btn-subtle"
+        onclick="location.hash='#/proposals'">
 
-        </div>
+        ← Back to Proposals
+
+    </button>
+
+</div>
 
     `;
+
+}
+
+function downloadProposalPDF(){
+
+    alert("PDF Export coming next...");
 
 }
 
