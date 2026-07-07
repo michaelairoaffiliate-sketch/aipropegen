@@ -39,6 +39,10 @@ const NAV_ITEMS = [
   { key: 'dashboard', label: 'Dashboard', icon: I.dashboard },
   { key: 'leads', label: 'Leads', icon: I.leads },
   { key: 'proposals', label: 'Proposals', icon: I.proposals },
+
+  // NEW
+  { key: 'proposal-builder', label: 'Proposal Builder', icon: I.sparkle },
+
   { key: 'templates', label: 'Templates', icon: I.templates },
   { key: 'email-templates', label: 'Email Templates', icon: I.email },
   { key: 'analytics', label: 'Analytics', icon: I.analytics },
@@ -583,7 +587,9 @@ function renderPricingStep(){
 
             <h2>Line Items</h2>
 
-            <div id="pricingItems"></div>
+            <div id="pricingItems">
+
+            </div>
 
             <button
                 class="btn btn-subtle"
@@ -611,11 +617,12 @@ function renderPricingStep(){
                 </button>
 
                 <button
-                    class="btn btn-primary">
+    class="btn btn-primary"
+    onclick="renderReviewStep()">
 
-                    Next →
+    Next →
 
-                </button>
+</button>
 
             </div>
 
@@ -628,42 +635,450 @@ function renderPricingStep(){
 
 function addPricingItem(){
 
-    const container =
-        document.getElementById("pricingItems");
+    const container = document.getElementById("pricingItems");
 
-    const row =
-        document.createElement("div");
+    const row = document.createElement("div");
 
-    row.style.marginBottom = "20px";
+    row.style.display = "grid";
+    row.style.gridTemplateColumns = "1fr 90px 140px";
+    row.style.gap = "10px";
+    row.style.marginBottom = "15px";
 
     row.innerHTML = `
-
         <input
             class="input item-name"
-            placeholder="Description">
+            placeholder="Description"
+            oninput="updateProposalTotal()">
 
-        <div style="display:flex;gap:10px;margin-top:10px;">
+        <input
+            class="input item-qty"
+            type="number"
+            value="1"
+            min="1"
+            oninput="updateProposalTotal()">
 
-            <input
-                class="input item-qty"
-                type="number"
-                value="1"
-                min="1"
-                style="width:120px;">
-
-            <input
-                class="input item-price"
-                type="number"
-                value="0"
-                style="width:180px;">
-
-        </div>
-
+        <input
+            class="input item-price"
+            type="number"
+            value="0"
+            oninput="updateProposalTotal()">
     `;
 
     container.appendChild(row);
 
 }
+
+function updateProposalTotal(){
+
+    let total = 0;
+
+    document.querySelectorAll("#pricingItems > div").forEach(row=>{
+
+        const qty = Number(row.querySelector(".item-qty").value) || 0;
+
+        const price = Number(row.querySelector(".item-price").value) || 0;
+
+        total += qty * price;
+
+    });
+
+    document.getElementById("proposalTotal").innerText =
+        "Total: $" + total.toLocaleString();
+
+}
+
+function renderReviewStep(){
+
+    let total = 0;
+
+    document.querySelectorAll("#pricingItems > div").forEach(row=>{
+
+        const qty = Number(row.querySelector(".item-qty").value) || 0;
+        const price = Number(row.querySelector(".item-price").value) || 0;
+
+        total += qty * price;
+
+    });
+
+    app.innerHTML = `
+        <div class="page-head">
+
+            <div>
+
+                <span class="page-badge">
+                    ✅ Proposal Builder
+                </span>
+
+                <h1>Review Proposal</h1>
+
+                <p class="page-subtitle">
+                    Review everything before generating.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h2>Client Information</h2>
+
+            <p><strong>Name:</strong> ${proposalBuilder.clientName}</p>
+            <p><strong>Company:</strong> ${proposalBuilder.company}</p>
+            <p><strong>Email:</strong> ${proposalBuilder.email}</p>
+            <p><strong>Phone:</strong> ${proposalBuilder.phone}</p>
+
+            <hr style="margin:25px 0;">
+
+            <h2>Project</h2>
+
+            <p><strong>Project:</strong> ${proposalBuilder.project}</p>
+            <p><strong>Goal:</strong> ${proposalBuilder.goal}</p>
+            <p>${proposalBuilder.scope}</p>
+
+            <hr style="margin:25px 0;">
+
+            <h2>Total: $${total.toLocaleString()}</h2>
+
+            <div style="display:flex;justify-content:space-between;margin-top:30px;">
+
+                <button
+                    class="btn btn-ghost"
+                    onclick="renderPricingStep()">
+
+                    ← Back
+
+                </button>
+
+                <button
+    class="btn btn-primary"
+    onclick="generateProposal()">
+
+    Generate Proposal
+
+</button>
+
+            </div>
+
+        </div>
+    `;
+
+}
+
+function generateProposal(){
+
+    let total = 0;
+
+    const items = [];
+
+    document.querySelectorAll("#pricingItems > div").forEach(row => {
+
+        const description = row.querySelector(".item-name").value;
+
+        const qty = Number(row.querySelector(".item-qty").value) || 0;
+
+        const price = Number(row.querySelector(".item-price").value) || 0;
+
+        total += qty * price;
+
+        items.push({
+            description,
+            qty,
+            price
+        });
+
+    });
+
+    const proposal = {
+
+        id: Date.now(),
+
+        clientName: proposalBuilder.clientName,
+
+        company: proposalBuilder.company,
+
+        email: proposalBuilder.email,
+
+        phone: proposalBuilder.phone,
+
+        project: proposalBuilder.project,
+
+        goal: proposalBuilder.goal,
+
+        scope: proposalBuilder.scope,
+
+        items: items,
+
+        total: total,
+
+        status: "Draft",
+
+        created: new Date().toLocaleDateString()
+
+    };
+
+    let proposals = JSON.parse(localStorage.getItem("generatedProposals") || "[]");
+
+    proposals.unshift(proposal);
+
+    localStorage.setItem(
+        "generatedProposals",
+        JSON.stringify(proposals)
+    );
+
+    renderGeneratedProposal(proposal);
+
+}
+
+function renderGeneratedProposal(proposal){
+
+    app.innerHTML = `
+
+        <div class="page-head">
+
+            <div>
+
+                <span class="page-badge">
+                    📄 Proposal
+                </span>
+
+                <h1>${proposal.project}</h1>
+
+                <p class="page-subtitle">
+                    Professional Proposal for ${proposal.clientName}
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h2>Client Information</h2>
+
+            <p><strong>Name:</strong> ${proposal.clientName}</p>
+
+            <p><strong>Company:</strong> ${proposal.company}</p>
+
+            <p><strong>Email:</strong> ${proposal.email}</p>
+
+            <p><strong>Phone:</strong> ${proposal.phone}</p>
+
+            <hr style="margin:25px 0;">
+
+            <h2>Project Details</h2>
+
+            <p><strong>Project:</strong> ${proposal.project}</p>
+
+            <p><strong>Goal:</strong> ${proposal.goal}</p>
+
+            <p>${proposal.scope}</p>
+
+            <hr style="margin:25px 0;">
+
+            <h2>Pricing</h2>
+
+            <table style="width:100%;border-collapse:collapse;">
+
+                <thead>
+
+                    <tr>
+
+                        <th align="left">Description</th>
+
+                        <th>Qty</th>
+
+                        <th>Price</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    ${proposal.items.map(item => `
+
+                        <tr>
+
+                            <td>${item.description}</td>
+
+                            <td align="center">${item.qty}</td>
+
+                            <td align="right">$${item.price.toLocaleString()}</td>
+
+                        </tr>
+
+                    `).join("")}
+
+                </tbody>
+
+            </table>
+
+            <hr style="margin:25px 0;">
+
+            <h2 style="text-align:right;">
+
+                Total: $${proposal.total.toLocaleString()}
+
+            </h2>
+
+            <hr style="margin:25px 0;">
+
+            <h2>Terms & Conditions</h2>
+
+            <p>
+
+                This proposal is valid for 30 days from the date of issue.
+                Acceptance of this proposal confirms authorization to begin
+                the project.
+
+            </p>
+
+            <br>
+
+            <p>
+
+                ____________________________
+
+                <br>
+
+                Client Signature
+
+            </p>
+
+            <div style="display:flex;gap:15px;margin-top:30px;">
+
+    <button
+        class="btn btn-primary"
+        onclick="downloadProposalPDF()">
+
+        📄 Download PDF
+
+    </button>
+
+    <button
+        class="btn btn-subtle"
+        onclick="window.print()">
+
+        🖨 Print
+
+    </button>
+
+    <button
+        class="btn btn-subtle"
+        onclick="location.hash='#/proposals'">
+
+        ← Back to Proposals
+
+    </button>
+
+</div>
+
+    `;
+
+}
+
+function downloadProposalPDF(){
+
+    const { jsPDF } = window.jspdf;
+
+    const doc = new jsPDF();
+
+    let y = 20;
+
+    doc.setFont("helvetica","bold");
+    doc.setFontSize(22);
+    doc.text("ProposalPilot AI",20,y);
+
+    y += 10;
+
+    doc.setFontSize(18);
+    doc.text(proposal.project || "Business Proposal",20,y);
+
+    y += 15;
+
+    doc.setFont("helvetica","normal");
+    doc.setFontSize(12);
+
+    doc.text("Client: " + proposal.clientName,20,y);
+    y += 8;
+
+    doc.text("Company: " + proposal.company,20,y);
+    y += 8;
+
+    doc.text("Email: " + proposal.email,20,y);
+    y += 8;
+
+    doc.text("Phone: " + proposal.phone,20,y);
+    y += 15;
+
+    doc.setFont("helvetica","bold");
+    doc.text("Project Details",20,y);
+
+    y += 8;
+
+    doc.setFont("helvetica","normal");
+
+    const scopeLines = doc.splitTextToSize(proposal.scope || "",170);
+
+    doc.text(scopeLines,20,y);
+
+    y += scopeLines.length * 7 + 10;
+
+    doc.setFont("helvetica","bold");
+    doc.text("Pricing",20,y);
+
+    y += 10;
+
+    doc.setFont("helvetica","normal");
+
+    proposal.items.forEach(item=>{
+
+        doc.text(
+            `${item.description} (${item.qty} × $${item.price})`,
+            20,
+            y
+        );
+
+        y += 8;
+
+    });
+
+    y += 5;
+
+    doc.setFont("helvetica","bold");
+
+    doc.text(
+        "Total: $" + proposal.total.toLocaleString(),
+        20,
+        y
+    );
+
+    y += 20;
+
+    doc.setFontSize(10);
+    doc.setFont("helvetica","normal");
+
+    doc.text(
+        "This proposal is valid for 30 days from the date of issue.",
+        20,
+        y
+    );
+
+    y += 15;
+
+    doc.text("Client Signature:",20,y);
+
+    y += 20;
+
+    doc.line(20,y,90,y);
+
+    doc.save(
+        `${proposal.clientName}-Proposal.pdf`
+    );
+
+}
+
 function proposalStatusBadge(p){
   if(p.approvalStatus === 'pending') return `<span class="badge badge-pending_approval">pending approval</span>`;
   return `<span class="badge badge-${p.status}">${p.status.replace('_',' ')}</span>`;
