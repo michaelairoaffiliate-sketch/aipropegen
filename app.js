@@ -826,9 +826,145 @@ function generateProposal(){
         JSON.stringify(proposals)
     );
 
-    alert("✅ Proposal Generated Successfully!");
+    renderGeneratedProposal(proposal);
 
-    location.hash = "#/proposals";
+}
+
+function renderGeneratedProposal(proposal){
+
+    app.innerHTML = `
+
+        <div class="page-head">
+
+            <div>
+
+                <span class="page-badge">
+                    📄 Proposal
+                </span>
+
+                <h1>${proposal.project}</h1>
+
+                <p class="page-subtitle">
+                    Professional Proposal for ${proposal.clientName}
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h2>Client Information</h2>
+
+            <p><strong>Name:</strong> ${proposal.clientName}</p>
+
+            <p><strong>Company:</strong> ${proposal.company}</p>
+
+            <p><strong>Email:</strong> ${proposal.email}</p>
+
+            <p><strong>Phone:</strong> ${proposal.phone}</p>
+
+            <hr style="margin:25px 0;">
+
+            <h2>Project Details</h2>
+
+            <p><strong>Project:</strong> ${proposal.project}</p>
+
+            <p><strong>Goal:</strong> ${proposal.goal}</p>
+
+            <p>${proposal.scope}</p>
+
+            <hr style="margin:25px 0;">
+
+            <h2>Pricing</h2>
+
+            <table style="width:100%;border-collapse:collapse;">
+
+                <thead>
+
+                    <tr>
+
+                        <th align="left">Description</th>
+
+                        <th>Qty</th>
+
+                        <th>Price</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    ${proposal.items.map(item => `
+
+                        <tr>
+
+                            <td>${item.description}</td>
+
+                            <td align="center">${item.qty}</td>
+
+                            <td align="right">$${item.price.toLocaleString()}</td>
+
+                        </tr>
+
+                    `).join("")}
+
+                </tbody>
+
+            </table>
+
+            <hr style="margin:25px 0;">
+
+            <h2 style="text-align:right;">
+
+                Total: $${proposal.total.toLocaleString()}
+
+            </h2>
+
+            <hr style="margin:25px 0;">
+
+            <h2>Terms & Conditions</h2>
+
+            <p>
+
+                This proposal is valid for 30 days from the date of issue.
+                Acceptance of this proposal confirms authorization to begin
+                the project.
+
+            </p>
+
+            <br>
+
+            <p>
+
+                ____________________________
+
+                <br>
+
+                Client Signature
+
+            </p>
+
+            <div style="display:flex;gap:15px;margin-top:30px;">
+
+                <button class="btn btn-primary" onclick="window.print()">
+
+                    🖨 Print
+
+                </button>
+
+                <button class="btn btn-subtle" onclick="location.hash='#/proposals'">
+
+                    ← Back to Proposals
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
 
 }
 
