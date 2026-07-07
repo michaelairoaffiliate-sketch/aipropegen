@@ -982,7 +982,10 @@ function renderGeneratedProposal(proposal){
 
 function downloadProposalPDF(){
 
-    alert("Download button clicked!");
+    if (!currentProposal) {
+        alert("No proposal available.");
+        return;
+    }
 
     const { jsPDF } = window.jspdf;
 
