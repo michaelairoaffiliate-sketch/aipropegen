@@ -617,11 +617,12 @@ function renderPricingStep(){
                 </button>
 
                 <button
-                    class="btn btn-primary">
+    class="btn btn-primary"
+    onclick="renderReviewStep()">
 
-                    Next →
+    Next →
 
-                </button>
+</button>
 
             </div>
 
@@ -629,6 +630,205 @@ function renderPricingStep(){
     `;
 
     addPricingItem();
+
+}
+
+function addPricingItem(){
+
+    const container = document.getElementById("pricingItems");
+
+    const row = document.createElement("div");
+
+    row.style.display = "grid";
+    row.style.gridTemplateColumns = "1fr 90px 140px";
+    row.style.gap = "10px";
+    row.style.marginBottom = "15px";
+
+    row.innerHTML = `
+        <input
+            class="input item-name"
+            placeholder="Description"
+            oninput="updateProposalTotal()">
+
+        <input
+            class="input item-qty"
+            type="number"
+            value="1"
+            min="1"
+            oninput="updateProposalTotal()">
+
+        <input
+            class="input item-price"
+            type="number"
+            value="0"
+            oninput="updateProposalTotal()">
+    `;
+
+    container.appendChild(row);
+
+}
+
+function updateProposalTotal(){
+
+    let total = 0;
+
+    document.querySelectorAll("#pricingItems > div").forEach(row=>{
+
+        const qty = Number(row.querySelector(".item-qty").value) || 0;
+
+        const price = Number(row.querySelector(".item-price").value) || 0;
+
+        total += qty * price;
+
+    });
+
+    document.getElementById("proposalTotal").innerText =
+        "Total: $" + total.toLocaleString();
+
+}
+
+function renderReviewStep(){
+
+    let total = 0;
+
+    document.querySelectorAll("#pricingItems > div").forEach(row=>{
+
+        const qty = Number(row.querySelector(".item-qty").value) || 0;
+        const price = Number(row.querySelector(".item-price").value) || 0;
+
+        total += qty * price;
+
+    });
+
+    app.innerHTML = `
+        <div class="page-head">
+
+            <div>
+
+                <span class="page-badge">
+                    ✅ Proposal Builder
+                </span>
+
+                <h1>Review Proposal</h1>
+
+                <p class="page-subtitle">
+                    Review everything before generating.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h2>Client Information</h2>
+
+            <p><strong>Name:</strong> ${proposalBuilder.clientName}</p>
+            <p><strong>Company:</strong> ${proposalBuilder.company}</p>
+            <p><strong>Email:</strong> ${proposalBuilder.email}</p>
+            <p><strong>Phone:</strong> ${proposalBuilder.phone}</p>
+
+            <hr style="margin:25px 0;">
+
+            <h2>Project</h2>
+
+            <p><strong>Project:</strong> ${proposalBuilder.project}</p>
+            <p><strong>Goal:</strong> ${proposalBuilder.goal}</p>
+            <p>${proposalBuilder.scope}</p>
+
+            <hr style="margin:25px 0;">
+
+            <h2>Total: $${total.toLocaleString()}</h2>
+
+            <div style="display:flex;justify-content:space-between;margin-top:30px;">
+
+                <button
+                    class="btn btn-ghost"
+                    onclick="renderPricingStep()">
+
+                    ← Back
+
+                </button>
+
+                <button
+    class="btn btn-primary"
+    onclick="generateProposal()">
+
+    Generate Proposal
+
+</button>
+
+            </div>
+
+        </div>
+    `;
+
+}
+
+function generateProposal(){
+
+    let total = 0;
+
+    const items = [];
+
+    document.querySelectorAll("#pricingItems > div").forEach(row => {
+
+        const description = row.querySelector(".item-name").value;
+
+        const qty = Number(row.querySelector(".item-qty").value) || 0;
+
+        const price = Number(row.querySelector(".item-price").value) || 0;
+
+        total += qty * price;
+
+        items.push({
+            description,
+            qty,
+            price
+        });
+
+    });
+
+    const proposal = {
+
+        id: Date.now(),
+
+        clientName: proposalBuilder.clientName,
+
+        company: proposalBuilder.company,
+
+        email: proposalBuilder.email,
+
+        phone: proposalBuilder.phone,
+
+        project: proposalBuilder.project,
+
+        goal: proposalBuilder.goal,
+
+        scope: proposalBuilder.scope,
+
+        items: items,
+
+        total: total,
+
+        status: "Draft",
+
+        created: new Date().toLocaleDateString()
+
+    };
+
+    let proposals = JSON.parse(localStorage.getItem("generatedProposals") || "[]");
+
+    proposals.unshift(proposal);
+
+    localStorage.setItem(
+        "generatedProposals",
+        JSON.stringify(proposals)
+    );
+
+    alert("✅ Proposal Generated Successfully!");
+
+    location.hash = "#/proposals";
 
 }
 
