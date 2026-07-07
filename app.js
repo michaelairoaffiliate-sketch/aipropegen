@@ -14,7 +14,7 @@ let proposalBuilder = {
     goal: '',
     items: []
 };
-
+let currentProposal = null;
 /* ---------------- icons ---------------- */
 const I = {
   dashboard: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="14" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="3" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="14" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/></svg>`,
@@ -825,7 +825,9 @@ function generateProposal(){
         "generatedProposals",
         JSON.stringify(proposals)
     );
-
+   
+currentProposal = proposal;
+   
     renderGeneratedProposal(proposal);
 
 }
@@ -980,6 +982,11 @@ function renderGeneratedProposal(proposal){
 
 function downloadProposalPDF(){
 
+    if (!currentProposal) {
+        alert("No proposal available.");
+        return;
+    }
+
     const { jsPDF } = window.jspdf;
 
     const doc = new jsPDF();
@@ -993,23 +1000,23 @@ function downloadProposalPDF(){
     y += 10;
 
     doc.setFontSize(18);
-    doc.text(proposal.project || "Business Proposal",20,y);
+    doc.text(currentProposal.project || "Business Proposal",20,y);
 
     y += 15;
 
     doc.setFont("helvetica","normal");
     doc.setFontSize(12);
 
-    doc.text("Client: " + proposal.clientName,20,y);
+    doc.text("Client: " + currentProposal.clientName,20,y);
     y += 8;
 
-    doc.text("Company: " + proposal.company,20,y);
+    doc.text("Company: " + currentProposal.company,20,y);
     y += 8;
 
-    doc.text("Email: " + proposal.email,20,y);
+    doc.text("Email: " + currentProposal.email,20,y);
     y += 8;
 
-    doc.text("Phone: " + proposal.phone,20,y);
+    doc.text("Phone: " + currentProposal.phone,20,y);
     y += 15;
 
     doc.setFont("helvetica","bold");
@@ -1019,7 +1026,7 @@ function downloadProposalPDF(){
 
     doc.setFont("helvetica","normal");
 
-    const scopeLines = doc.splitTextToSize(proposal.scope || "",170);
+    const scopeLines = doc.splitTextToSize(currentProposal.scope || "",170);
 
     doc.text(scopeLines,20,y);
 
@@ -1032,7 +1039,7 @@ function downloadProposalPDF(){
 
     doc.setFont("helvetica","normal");
 
-    proposal.items.forEach(item=>{
+    currentProposal.items.forEach(item=>{
 
         doc.text(
             `${item.description} (${item.qty} × $${item.price})`,
@@ -1049,7 +1056,7 @@ function downloadProposalPDF(){
     doc.setFont("helvetica","bold");
 
     doc.text(
-        "Total: $" + proposal.total.toLocaleString(),
+        "Total: $" + currentProposal.total.toLocaleString(),
         20,
         y
     );
@@ -1074,8 +1081,8 @@ function downloadProposalPDF(){
     doc.line(20,y,90,y);
 
     doc.save(
-        `${proposal.clientName}-Proposal.pdf`
-    );
+    `${currentProposal.clientName}-Proposal.pdf`
+);
 
 }
 
