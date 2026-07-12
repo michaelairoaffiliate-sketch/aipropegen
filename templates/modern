@@ -36,9 +36,33 @@ class ModernTemplate {
 
     drawCover() {
 
-        console.log("Modern Cover");
+    const doc = this.pdf.doc;
 
-    }
+    // Premium Blue Header
+
+    doc.setFillColor(37,99,235);
+
+    doc.rect(
+        0,
+        0,
+        this.pdf.pageWidth,
+        48,
+        "F"
+    );
+
+    // White Accent Line
+
+    doc.setFillColor(255,255,255);
+
+    doc.rect(
+        0,
+        58,
+        this.pdf.pageWidth,
+        1.2,
+        "F"
+    );
+
+}
 
     drawExecutiveSummary() {
 
