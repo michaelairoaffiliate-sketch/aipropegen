@@ -1,40 +1,72 @@
 /*
 ==========================================================
  ProposalPilot AI Professional Edition
- Proposal Model
- Version: 2.0.0
+ Modern Professional Template
+ Version: 1.0.0
 ==========================================================
 */
 
-class ProposalModel {
+class ModernTemplate {
 
-    constructor(data = {}) {
+    constructor(pdf) {
 
-        this.client = {
-            name: data.clientName || "",
-            company: data.company || "",
-            email: data.email || "",
-            phone: data.phone || ""
-        };
+        this.pdf = pdf;
 
-        this.project = {
-            title: data.project || "",
-            description: data.description || "",
-            objectives: [],
-            deliverables: [],
-            timeline: [],
-            investment: {}
-        };
+        this.components = new PDFComponents(pdf);
 
-        this.company = {
-            name: "ProposalPilot AI Professional",
-            website: "https://aipropegen.vercel.app",
-            edition: "Professional Edition"
-        };
+    }
+
+    render() {
+
+        this.drawCover();
+
+        this.pdf.addPage();
+
+        this.drawExecutiveSummary();
+
+        this.pdf.addPage();
+
+        this.drawProjectOverview();
+
+        this.pdf.addPage();
+
+        this.drawBusinessObjectives();
+
+    }
+
+    drawCover() {
+
+        console.log("Modern Cover");
+
+    }
+
+    drawExecutiveSummary() {
+
+        this.components.sectionHeader(
+            "Executive Summary",
+            "Prepared exclusively for your business"
+        );
+
+    }
+
+    drawProjectOverview() {
+
+        this.components.sectionHeader(
+            "Project Overview",
+            "Understanding your project"
+        );
+
+    }
+
+    drawBusinessObjectives() {
+
+        this.components.sectionHeader(
+            "Business Objectives",
+            "The primary goals of this proposal"
+        );
 
     }
 
 }
 
-// Global Export
-window.ProposalModel = ProposalModel;
+window.ModernTemplate = ModernTemplate;
