@@ -1,1 +1,40 @@
+/*
+==========================================================
+ ProposalPilot AI Professional Edition
+ Proposal Model
+ Version: 2.0.0
+==========================================================
+*/
 
+class ProposalModel {
+
+    constructor(data = {}) {
+
+        this.client = {
+            name: data.clientName || "",
+            company: data.company || "",
+            email: data.email || "",
+            phone: data.phone || ""
+        };
+
+        this.project = {
+            title: data.project || "",
+            description: data.description || "",
+            objectives: [],
+            deliverables: [],
+            timeline: [],
+            investment: {}
+        };
+
+        this.company = {
+            name: "ProposalPilot AI Professional",
+            website: "https://aipropegen.vercel.app",
+            edition: "Professional Edition"
+        };
+
+    }
+
+}
+
+// Global Export
+window.ProposalModel = ProposalModel;
