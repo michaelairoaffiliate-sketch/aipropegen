@@ -1,1 +1,67 @@
+/*
+==========================================================
+ ProposalPilot AI Professional Edition
+ PDF Generator
+ Version: 2.0.0
+==========================================================
+*/
 
+class ProposalPDF {
+
+    constructor(proposalData) {
+
+        this.proposal = proposalData;
+
+        this.doc = new jsPDF({
+            orientation: "portrait",
+            unit: "mm",
+            format: "a4"
+        });
+
+        this.pageWidth =
+            this.doc.internal.pageSize.getWidth();
+
+        this.pageHeight =
+            this.doc.internal.pageSize.getHeight();
+
+        this.margin = 20;
+
+        this.y = this.margin;
+
+    }
+
+    render() {
+
+        // Cover Page
+        this.drawCover();
+
+        // Executive Summary
+        this.addPage();
+        this.drawExecutiveSummary();
+
+        // Project Overview
+        this.addPage();
+        this.drawProjectOverview();
+
+        // Business Objectives
+        this.addPage();
+        this.drawBusinessObjectives();
+
+        // Save PDF
+        this.save();
+
+    }
+
+    save() {
+
+        const filename =
+            `${this.proposal.clientName || "Proposal"}-Proposal.pdf`;
+
+        this.doc.save(filename);
+
+    }
+
+}
+
+// Global Export
+window.ProposalPDF = ProposalPDF;
