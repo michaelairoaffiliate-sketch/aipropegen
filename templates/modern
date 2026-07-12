@@ -1,1 +1,72 @@
+/*
+==========================================================
+ ProposalPilot AI Professional Edition
+ Modern Professional Template
+ Version: 1.0.0
+==========================================================
+*/
 
+class ModernTemplate {
+
+    constructor(pdf) {
+
+        this.pdf = pdf;
+
+        this.components = new PDFComponents(pdf);
+
+    }
+
+    render() {
+
+        this.drawCover();
+
+        this.pdf.addPage();
+
+        this.drawExecutiveSummary();
+
+        this.pdf.addPage();
+
+        this.drawProjectOverview();
+
+        this.pdf.addPage();
+
+        this.drawBusinessObjectives();
+
+    }
+
+    drawCover() {
+
+        console.log("Modern Cover");
+
+    }
+
+    drawExecutiveSummary() {
+
+        this.components.sectionHeader(
+            "Executive Summary",
+            "Prepared exclusively for your business"
+        );
+
+    }
+
+    drawProjectOverview() {
+
+        this.components.sectionHeader(
+            "Project Overview",
+            "Understanding your project"
+        );
+
+    }
+
+    drawBusinessObjectives() {
+
+        this.components.sectionHeader(
+            "Business Objectives",
+            "The primary goals of this proposal"
+        );
+
+    }
+
+}
+
+window.ModernTemplate = ModernTemplate;
