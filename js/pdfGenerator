@@ -32,26 +32,16 @@ class ProposalPDF {
 
     render() {
 
-        // Cover Page
-        this.drawCover();
+    // Create the selected template
+    const template = new ModernTemplate(this);
 
-        // Executive Summary
-        this.addPage();
-        this.drawExecutiveSummary();
+    // Render the complete proposal
+    template.render();
 
-        // Project Overview
-        this.addPage();
-        this.drawProjectOverview();
+    // Finish the PDF
+    this.save();
 
-        // Business Objectives
-        this.addPage();
-        this.drawBusinessObjectives();
-
-        // Save PDF
-        this.save();
-
-    }
-
+}
     save() {
 
         const filename =
