@@ -27,46 +27,141 @@ class ProposalPDF {
         this.margin = 20;
 
         this.y = this.margin;
-// ======================================
-// Load ProposalPilot AI Logo
-// ======================================
 
-this.logo = new Image();
+        // ======================================
+        // Load ProposalPilot AI Logo
+        // ======================================
 
-this.logo.src = "assets/images/proposalpilot-logo.png";
-// ======================================
-// Theme
-// ======================================
+        this.logo = new Image();
 
-this.theme = {
+        this.logo.src = "assets/images/proposalpilot-logo.png";
 
-    primary: [37,99,235],
+        // ======================================
+        // Theme
+        // ======================================
 
-    secondary: [248,250,252],
+        this.theme = {
 
-    text: [30,30,30],
+            primary: [37, 99, 235],
 
-    gray: [110,110,110],
+            secondary: [248, 250, 252],
 
-    white: [255,255,255],
+            text: [30, 30, 30],
 
-    border: [225,225,225]
+            gray: [110, 110, 110],
 
-};
+            white: [255, 255, 255],
+
+            border: [225, 225, 225]
+
+        };
+
     }
 
     render() {
 
-    // Create the selected template
-    const template = new ModernTemplate(this);
+        const template = new ModernTemplate(this);
 
-    // Render the complete proposal
-    template.render();
+        template.render();
 
-    // Finish the PDF
-    this.save();
+        this.save();
 
-}
+    }
+
+    // ======================================================
+    // ADD PAGE
+    // ======================================================
+
+    addPage() {
+
+        this.drawFooter();
+
+        this.doc.addPage();
+
+        this.drawHeader();
+
+        this.y = this.margin;
+
+    }
+
+    // ======================================================
+    // PAGE HEADER
+    // ======================================================
+
+    drawHeader() {
+
+        this.doc.setFillColor(...this.theme.primary);
+
+        this.doc.rect(
+            0,
+            0,
+            this.pageWidth,
+            18,
+            "F"
+        );
+
+        this.doc.setFont(
+            "helvetica",
+            "bold"
+        );
+
+        this.doc.setFontSize(14);
+
+        this.doc.setTextColor(...this.theme.white);
+
+        this.doc.text(
+            this.proposal.company.name,
+            this.margin,
+            12
+        );
+
+        this.doc.setTextColor(...this.theme.text);
+
+        this.y = 28;
+
+    }
+
+    // ======================================================
+    // PAGE FOOTER
+    // ======================================================
+
+    drawFooter() {
+
+        this.doc.setDrawColor(...this.theme.border);
+
+        this.doc.line(
+            this.margin,
+            this.pageHeight - 15,
+            this.pageWidth - this.margin,
+            this.pageHeight - 15
+        );
+
+        this.doc.setFont(
+            "helvetica",
+            "normal"
+        );
+
+        this.doc.setFontSize(9);
+
+        this.doc.setTextColor(...this.theme.gray);
+
+        this.doc.text(
+            "Powered by ProposalPilot AI Professional Edition",
+            this.margin,
+            this.pageHeight - 8
+        );
+
+        this.doc.text(
+            "Page " + this.doc.getCurrentPageInfo().pageNumber,
+            this.pageWidth - this.margin,
+            this.pageHeight - 8,
+            {
+                align: "right"
+            }
+        );
+
+    }
+
     save() {
 
         const filename =
@@ -78,5 +173,4 @@ this.theme = {
 
 }
 
-// Global Export
 window.ProposalPDF = ProposalPDF;
