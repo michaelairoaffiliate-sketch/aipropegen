@@ -980,33 +980,22 @@ function renderGeneratedProposal(proposal){
 
 }
 
-function downloadProposalPDF() {
+function proposalStatusBadge(p) {
 
-    try {
+    if (p.approvalStatus === "pending") {
 
-        if (!currentProposal) {
-
-            alert("No proposal available.");
-
-            return;
-
-        }
-
-        const proposal = new ProposalModel(currentProposal);
-
-        const pdf = new ProposalPDF(proposal);
-
-        pdf.render();
-
-    } catch (error) {
-
-        console.error(error);
-
-        alert(error.message);
+        return `<span class="badge badge-pending_approval">
+            Pending Approval
+        </span>`;
 
     }
 
+    return `<span class="badge badge-${p.status}">
+        ${String(p.status).replace("_"," ")}
+    </span>`;
+
 }
+
 function openCreateProposalModal(prefillLead){
   const leadOptions = DB.leads.map(l=>`<option value="${l.id}" ${prefillLead===l.id?'selected':''}>${l.name} — ${l.company}</option>`).join('');
   openModal(`
