@@ -51,7 +51,7 @@ this.logo.src = "assets/images/proposalpilot-logo.png";
     save() {
 
         const filename =
-            `${this.proposal.clientName || "Proposal"}-Proposal.pdf`;
+            `${this.proposal.client.name || "Proposal"}-Proposal.pdf`;
 
         this.doc.save(filename);
 
