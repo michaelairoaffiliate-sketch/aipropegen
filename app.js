@@ -980,112 +980,27 @@ function renderGeneratedProposal(proposal){
 
 }
 
-function downloadProposalPDF(){
+function downloadProposalPDF() {
 
     if (!currentProposal) {
+
         alert("No proposal available.");
+
         return;
+
     }
 
-    const { jsPDF } = window.jspdf;
+    // Convert the current proposal into the new Proposal Model
 
-    const doc = new jsPDF();
+    const proposal = new ProposalModel(currentProposal);
 
-    let y = 20;
+    // Generate the PDF using the new engine
 
-    doc.setFont("helvetica","bold");
-    doc.setFontSize(22);
-    doc.text("ProposalPilot AI",20,y);
+    const pdf = new ProposalPDF(proposal);
 
-    y += 10;
-
-    doc.setFontSize(18);
-    doc.text(currentProposal.project || "Business Proposal",20,y);
-
-    y += 15;
-
-    doc.setFont("helvetica","normal");
-    doc.setFontSize(12);
-
-    doc.text("Client: " + currentProposal.clientName,20,y);
-    y += 8;
-
-    doc.text("Company: " + currentProposal.company,20,y);
-    y += 8;
-
-    doc.text("Email: " + currentProposal.email,20,y);
-    y += 8;
-
-    doc.text("Phone: " + currentProposal.phone,20,y);
-    y += 15;
-
-    doc.setFont("helvetica","bold");
-    doc.text("Project Details",20,y);
-
-    y += 8;
-
-    doc.setFont("helvetica","normal");
-
-    const scopeLines = doc.splitTextToSize(currentProposal.scope || "",170);
-
-    doc.text(scopeLines,20,y);
-
-    y += scopeLines.length * 7 + 10;
-
-    doc.setFont("helvetica","bold");
-    doc.text("Pricing",20,y);
-
-    y += 10;
-
-    doc.setFont("helvetica","normal");
-
-    currentProposal.items.forEach(item=>{
-
-        doc.text(
-            `${item.description} (${item.qty} × $${item.price})`,
-            20,
-            y
-        );
-
-        y += 8;
-
-    });
-
-    y += 5;
-
-    doc.setFont("helvetica","bold");
-
-    doc.text(
-        "Total: $" + currentProposal.total.toLocaleString(),
-        20,
-        y
-    );
-
-    y += 20;
-
-    doc.setFontSize(10);
-    doc.setFont("helvetica","normal");
-
-    doc.text(
-        "This proposal is valid for 30 days from the date of issue.",
-        20,
-        y
-    );
-
-    y += 15;
-
-    doc.text("Client Signature:",20,y);
-
-    y += 20;
-
-    doc.line(20,y,90,y);
-
-    doc.save(
-    `${currentProposal.clientName}-Proposal.pdf`
-);
+    pdf.render();
 
 }
-
 function proposalStatusBadge(p){
   if(p.approvalStatus === 'pending') return `<span class="badge badge-pending_approval">pending approval</span>`;
   return `<span class="badge badge-${p.status}">${p.status.replace('_',' ')}</span>`;
