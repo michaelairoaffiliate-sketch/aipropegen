@@ -13,7 +13,7 @@ class PDFComponents {
         this.pdf = pdf;
 
     }
-
+ 
     sectionHeader(title, subtitle) {
 
         const doc = this.pdf.doc;
