@@ -34,6 +34,25 @@ class ProposalPDF {
 this.logo = new Image();
 
 this.logo.src = "assets/images/proposalpilot-logo.png";
+// ======================================
+// Theme
+// ======================================
+
+this.theme = {
+
+    primary: [37,99,235],
+
+    secondary: [248,250,252],
+
+    text: [30,30,30],
+
+    gray: [110,110,110],
+
+    white: [255,255,255],
+
+    border: [225,225,225]
+
+};
     }
 
     render() {
