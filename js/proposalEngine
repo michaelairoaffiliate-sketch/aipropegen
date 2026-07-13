@@ -1,30 +1,30 @@
-/*
-==========================================================
- ProposalPilot AI Professional Edition
- Proposal Engine
- Version: 2.1.0
-==========================================================
-*/
+// ======================================================
+// ProposalPilot AI Professional Edition
+// Proposal Engine
+// ======================================================
 
 class ProposalEngine {
 
-    constructor(formData) {
+    constructor(data) {
 
-        // Build a structured proposal model
-        this.model = new ProposalModel(formData);
+        // Build the proposal model
+        this.proposal = new ProposalModel(data);
+
+        // Create the PDF generator
+        this.pdf = new ProposalPDF(this.proposal);
 
     }
 
+    // ======================================================
+    // Generate Proposal
+    // ======================================================
+
     generate() {
 
-        // Pass the model into the PDF generator
-        const pdf = new ProposalPDF(this.model);
-
-        pdf.render();
+        this.pdf.render();
 
     }
 
 }
 
-// Global Export
 window.ProposalEngine = ProposalEngine;
